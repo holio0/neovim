@@ -663,6 +663,10 @@ void grid_put_linebuf(ScreenGrid *grid, int row, int coloff, int col, int endcol
 {
   bool redraw_next;                         // redraw_this for next character
   bool clear_next = false;
+  if (!(0 <= row && row < grid->rows)) {
+    DLOG("invalid range, skipped");
+    return;
+  }
   assert(0 <= row && row < grid->rows);
   // TODO(bfredl): check all callsites and eliminate
   // Check for illegal col, just in case
